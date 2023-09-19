@@ -1,0 +1,26 @@
+{
+  "name": "getlinked",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
+    "styled-components": "^5.3.9"
+  },
+  "devDependencies": {
+    "eslint": "8.21.0",
+    "eslint-config-next": "12.2.4"
+  },
+  "description": "The Dockerfile uses a multi-stage build to first build the Next.js app in one image, and then serve it using a lightweight Node.js image in a separate stage.",
+  "main": "next.config.js",
+  "author": "",
+  "license": "ISC"
+}
