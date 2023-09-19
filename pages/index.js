@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Hero from './components/Hero';
+import Header from './components/Header';
+import colors from '../utils/colors';
 export default function Home() {
   return (
-    <div style={{
-      backgroundColor: "purple"
-    }}>
+    <div>
       <Head>
         <title>GetLinked</title>
         <meta name="description" content="GetLinked" />

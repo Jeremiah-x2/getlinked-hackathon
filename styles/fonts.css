@@ -1,5 +1,20 @@
 @font-face {
-  font-family: "Amazing Kids";
-  src: url("/fonts/Amazing Kids.ttf") format("truetype");
+  font-family: "ClashDisplay";
+  src: url("/fonts/ClashDisplay-Bold.otf") format("truetype");
+  font-style: bold;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-style: bold;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Medium.ttf") format("truetype");
+  font-style: medium;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
   font-style: normal;
 }
