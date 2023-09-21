@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
-import colors from "../../utils/colors";
+import colors from "../../../utils/colors";
 
 export default function Privacy() {
   return (
@@ -31,14 +31,20 @@ export default function Privacy() {
             <p>Here are terms of our Standard License:</p>
             <ul>
               <li>
-                <img src="/list-terms.png" alt="check mark" />
+                <img
+                  src="/images/landing-page/list-terms.png"
+                  alt="check mark"
+                />
                 <p>
                   The Standard License grants you a non-exclusive right to
                   navigate and register for our event
                 </p>
               </li>
               <li>
-                <img src="/list-terms.png" alt="check mark" />
+                <img
+                  src="/images/landing-page/list-terms.png"
+                  alt="check mark"
+                />
                 <p>
                   You are licensed to use the item available at any free source
                   sites, for your project developement
@@ -52,7 +58,7 @@ export default function Privacy() {
         </div>
       </div>
       <img
-        src="/privacy.png"
+        src="/images/landing-page/privacy.png"
         alt="Privacy and Policy"
         className="privacy-image"
       />

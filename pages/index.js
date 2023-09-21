@@ -1,13 +1,13 @@
 import Head from "next/head";
-import Hero from "./components/Hero";
+import Hero from "./components/landing-page/Hero";
 import colors from "../utils/colors";
-import Introduction from "./components/Introduction";
-import itemsData from "./components/itemsData";
-import Timeline from "./components/Timeline";
-import timelineData from "./components/timelineData";
-import PrizesAwards from "./components/PrizesAwards";
-import Privacy from "./components/Privacy";
-import Footer from "./components/Footer";
+import Introduction from "./components/landing-page/Introduction";
+import itemsData from "./components/landing-page/itemsData";
+import Timeline from "./components/landing-page/Timeline";
+import timelineData from "./components/landing-page/timelineData";
+import PrizesAwards from "./components/landing-page/PrizesAwards";
+import Privacy from "./components/landing-page/Privacy";
+import Footer from "./components/landing-page/Footer";
 import styled from "styled-components";
 export default function Home() {
   const items = itemsData.map((value, index) => (

@@ -1,5 +1,5 @@
 import React from "react";
-import colors from "../../utils/colors";
+import colors from "../../../utils/colors";
 import styled from "styled-components";
 
 export default function Introduction(props) {
@@ -12,9 +12,9 @@ export default function Introduction(props) {
 
   const Container = styled.section`
     border: 2px solid blue;
-    padding: 50px 70px;
+    padding: 45px 100px;
     display: flex;
-    gap: 1rem;
+    gap: 5rem;
     flex-direction: ${id % 2 === 0 ? "row" : "row-reverse "};
     border-bottom: 1px solid;
     align-items: center;
@@ -25,20 +25,27 @@ export default function Introduction(props) {
     .image img {
       width: 100%;
     }
-    .head-bottom {
-      display: block;
-      color: ${colors.pink};
-    }
-    .main-content {
-      margin-top: 16px;
-      font-size: 14px;
-      line-height: 1.9;
+    .description {
+      h1 {
+        font-size: 32px;
+        font-weight: bold;
+      }
+      .head-bottom {
+        display: block;
+        color: ${colors.pink};
+        margin-top: 12px;
+      }
+      .main-content {
+        margin-top: 16px;
+        font-size: 14px;
+        line-height: 1.9;
+      }
     }
   `;
   return (
     <Container>
       <div className="image">
-        <img src={image} alt="" />
+        <img src={"/images/landing-page/" + image} alt="" />
       </div>
       <div className="description">
         <h1>

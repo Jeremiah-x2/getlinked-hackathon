@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import colors from "../../utils/colors";
+import colors from "../../../utils/colors";
 
 export default function Timeline(props) {
   const { title, task, num, date, id } = props.timelineData;
