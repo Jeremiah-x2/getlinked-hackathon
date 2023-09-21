@@ -14,9 +14,12 @@ body {
 }
 button,
 a,
-input {
+input,
+textarea,
+select {
   font-family: "Montserrat", sans-serif;
   outline: none;
+  color: #fff;
 }
 a {
   color: inherit;
@@ -26,20 +29,16 @@ a {
 * {
   box-sizing: border-box;
 }
-/* width */
 
-/* Handle */
+.gradientText {
+  background: linear-gradient(90deg, #903aff 3.08%, #ff26b9 93.85%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 @media screen and (min-width: 1024px) {
   ::-webkit-scrollbar {
     width: 10px;
   }
-
-  /* Track */
-  /* ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: ;
-  } */
 }
