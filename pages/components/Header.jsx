@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import colors from "../../utils/colors";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function Header() {
+  const router = useRouter();
+  const handleHomeClick = () => {
+    router.push("/landingpage");
+  };
+
   const [showMenu, setShowMenu] = useState("");
   function handleShowMenu() {
     setShowMenu("show--menu");
@@ -13,7 +19,7 @@ function Header() {
   }
   return (
     <Container>
-      <div className="title">
+      <div className="title" onClick={handleHomeClick}>
         {/* <Link href="/"> */}
         get<span>linked</span>
         {/* </Link> */}
