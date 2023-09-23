@@ -18,3 +18,8 @@
   src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
   font-style: normal;
 }
+@font-face {
+  font-family: "UnicaOne";
+  src: url("/fonts/UnicaOne-Regular.ttf") format("truetype");
+  font-style: normal;
+}

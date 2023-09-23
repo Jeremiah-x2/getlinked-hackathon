@@ -11,7 +11,8 @@ const Buttons = styled.button`
   color: #fff;
   border: none;
   border-radius: 5px;
-  font-weight: bold;
+  font-size: 16px;
+  font-family: Montserrat;
   background: linear-gradient(
     270deg,
     #903aff 0%,

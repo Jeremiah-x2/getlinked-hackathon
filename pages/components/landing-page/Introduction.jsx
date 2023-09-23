@@ -1,8 +1,42 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import colors from "../../../utils/colors";
 import styled from "styled-components";
+import ChangeSrc from "./ChangeSrc";
+import itemsData from "./itemsData";
 
-export default function Introduction(props) {
+export default function Introduction() {
+  const items = itemsData.map((value, index) => (
+    <IntroductionLoop key={index} data={value} />
+  ));
+  return <ItemsContainer>{items}</ItemsContainer>;
+}
+
+const ItemsContainer = styled.section`
+  position: relative;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(225, 225, 225, 0.04);
+    background-image: url("/images/landing-page/flare.png");
+    background-repeat: repeat-y;
+    background-size: contain;
+  }
+  @media screen and (max-width: 1100px) {
+    &::before {
+      content: "";
+      background-size: 100%;
+      background-image: url("/images/landing-page/flare-mobile.png");
+      background-size: 180%;
+    }
+  }
+`;
+
+export function IntroductionLoop(props) {
   const {
     id,
     image,
@@ -10,24 +44,70 @@ export default function Introduction(props) {
     mainContent,
   } = props.data;
 
-  const Container = styled.section`
-    border: 2px solid blue;
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [style, setStyle] = useState("");
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 1100) {
+        setIsSmallScreen(true);
+        setStyle("column");
+      } else {
+        setIsSmallScreen(false);
+        setStyle(id % 2 === 0 ? "row" : "row-reverse");
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <Container>
+      <div>
+        <div className="image" style={{ flexDirection: style }}>
+          <img src={"/images/landing-page/" + image} alt="" />
+          <ChangeSrc
+            mobile={"/images/landing-page/" + image + "-mobile.png"}
+            desktop={"/images/landing-page/" + image + ".png"}
+            class={image}
+            alt={top + " " + bottom}
+          />
+        </div>
+        <div className="description" style={{ style }}>
+          <h1>
+            {top} <span className="head-bottom">{bottom}</span>
+          </h1>
+          <div className="main-content">{mainContent}</div>
+        </div>
+      </div>
+    </Container>
+  );
+}
+
+const Container = styled.section`
+  & > div {
     padding: 45px 100px;
     display: flex;
     gap: 5rem;
-    flex-direction: ${id % 2 === 0 ? "row" : "row-reverse "};
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #ffffff2e;
     align-items: center;
+
     & > div {
       width: 50%;
-      /* border: 2px solid red; */
+      max-width: 530px;
     }
     .image img {
       width: 100%;
     }
     .description {
       h1 {
-        font-size: 32px;
+        font-family: clashDisplay;
+        font-size: 2rem;
         font-weight: bold;
       }
       .head-bottom {
@@ -41,18 +121,25 @@ export default function Introduction(props) {
         line-height: 1.9;
       }
     }
-  `;
-  return (
-    <Container>
-      <div className="image">
-        <img src={"/images/landing-page/" + image} alt="" />
-      </div>
-      <div className="description">
-        <h1>
-          {top} <span className="head-bottom">{bottom}</span>
-        </h1>
-        <div className="main-content">{mainContent}</div>
-      </div>
-    </Container>
-  );
-}
+  }
+  @media screen and (max-width: 1100px) {
+    text-align: center;
+    & > div {
+      padding: 1.5rem 2.1875rem;
+      flex-direction: column;
+      gap: 1.5rem;
+      & > div {
+        width: 100%;
+        max-width: 100vw;
+      }
+      .description {
+        h1 {
+          font-size: 1.25rem;
+        }
+        .main-content {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+`;

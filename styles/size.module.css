@@ -1,0 +1,8 @@
+/* styles.module.css */
+@media (max-width: 1100px) {
+  /* Styles for screens with a max width of 768px */
+}
+
+@media (min-width: 769px) {
+  /* Styles for screens with a min width of 769px */
+}

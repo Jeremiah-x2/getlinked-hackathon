@@ -1,0 +1,5 @@
+.div::before {
+  content: "lkglkdjfkld";
+  background-color: red;
+  padding: 5px;
+}
