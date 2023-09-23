@@ -24,5 +24,5 @@ export default function ChangeSrc(props) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  return <img src={imageSrc} alt={alt} classname={classname} />;
+  return <img src={imageSrc} alt={alt} className={classname} />;
 }
