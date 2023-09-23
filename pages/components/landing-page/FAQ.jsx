@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { faq } from "./faqData";
+import { faq } from "../../../Data/faqData";
 import colors from "../../../utils/colors";
 
 export default function FAQ() {

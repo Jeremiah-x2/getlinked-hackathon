@@ -4,7 +4,7 @@ import Hero from "./components/landing-page/Hero";
 import colors from "../utils/colors";
 import Introduction from "./components/landing-page/Introduction";
 import Timelineloop from "./components/landing-page/Timeline";
-import timelineData from "./components/landing-page/timelineData";
+import timelineData from "../Data/timelineData";
 import PrizesAwards from "./components/landing-page/PrizesAwards";
 import Privacy from "./components/landing-page/Privacy";
 import Footer from "./components/landing-page/Footer";

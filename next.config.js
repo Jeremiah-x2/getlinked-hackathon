@@ -5,7 +5,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  pageExtensions: ["jsx"],
 };
 
 module.exports = nextConfig;

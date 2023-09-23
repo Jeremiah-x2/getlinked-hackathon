@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../../../utils/colors";
-import { timelineData } from "./timelineData";
+import { timelineData } from "../../../Data/timelineData";
 import { useState, useEffect } from "react";
 
 export function Timeline(props) {

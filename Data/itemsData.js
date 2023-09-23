@@ -1,5 +1,5 @@
-import Criteria from "./Criteria";
-import FAQ from "./FAQ";
+import Criteria from "../pages/components/landing-page/Criteria";
+import FAQ from "../pages/components/landing-page/FAQ";
 
 const itemsData = [
   {

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import colors from "../../../utils/colors";
 import styled from "styled-components";
 import ChangeSrc from "./ChangeSrc";
-import { itemsData } from "./itemsData";
+import { itemsData } from "../../../Data/itemsData";
 
 export default function Introduction() {
   const items = itemsData.map((value, index) => (
