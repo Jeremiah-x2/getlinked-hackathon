@@ -60,7 +60,7 @@ export function IntroductionLoop(props) {
     }
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -69,8 +69,8 @@ export function IntroductionLoop(props) {
 
   return (
     <Container>
-      <div>
-        <div className="image" style={{ flexDirection: style }}>
+      <div style={{ flexDirection: style }}>
+        <div className="image">
           <img src={"/images/landing-page/" + image} alt="" />
           <ChangeSrc
             mobile={"/images/landing-page/" + image + "-mobile.png"}
@@ -123,11 +123,11 @@ const Container = styled.section`
       }
     }
   }
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     text-align: center;
     & > div {
       padding: 1.5rem 2.1875rem;
-      flex-direction: column;
+      /* flex-direction: column; */
       gap: 1.5rem;
       & > div {
         width: 100%;
