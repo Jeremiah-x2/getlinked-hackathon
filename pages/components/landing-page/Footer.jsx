@@ -148,7 +148,7 @@ const Container = styled.footer`
     text-align: center;
     margin-top: 3.3125rem;
   }
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     padding: 51px 67px;
     .footer {
       flex-direction: column;

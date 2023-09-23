@@ -149,7 +149,7 @@ const Container = styled.section`
     max-height: 952px;
   }
 
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     font-size: 12px;
     flex-direction: column;
     padding: 4.5rem 2.875rem 5.25rem;

@@ -14,7 +14,7 @@ export function Timeline(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth <= 1100) {
+      if (window.innerWidth <= 1200) {
         setIsSmallScreen(true);
         setStyle("column");
         setTextAlign("left");
@@ -120,7 +120,7 @@ const Container = styled.section`
       color: ${colors.pink};
     }
   }
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     margin-top: 1.4375rem;
     align-items: end;
     gap: 1rem;

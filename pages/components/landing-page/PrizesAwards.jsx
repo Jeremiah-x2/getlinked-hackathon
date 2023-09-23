@@ -85,7 +85,7 @@ const Container = styled.section`
     }
   } */
 
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     display: flex;
     flex-direction: column;
     row-gap: 0;

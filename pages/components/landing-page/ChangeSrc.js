@@ -9,7 +9,7 @@ export default function ChangeSrc(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth <= 1100) {
+      if (window.innerWidth <= 1200) {
         setIsSmallScreen(true);
         setImageSrc(mobile);
       } else {

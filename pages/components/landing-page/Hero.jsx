@@ -130,7 +130,7 @@ const Hero = styled.section`
       }
     }
   }
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     width: 100vw;
     height: auto;
     display: flex;

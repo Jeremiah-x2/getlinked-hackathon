@@ -33,7 +33,7 @@ const Container = styled.div`
       font-weight: bold;
     }
   }
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     gap: 1.25rem;
     p {
       font-size: 12px;
