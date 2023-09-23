@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../../../utils/colors";
-import timelineData from "./timelineData";
+import { timelineData } from "./timelineData";
 import { useState, useEffect } from "react";
 
 export function Timeline(props) {
@@ -11,6 +11,7 @@ export function Timeline(props) {
   const [textAlign, setTextAlign] = useState("");
   const [textAlignDate, setTextAlignDate] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 1100) {
@@ -32,7 +33,7 @@ export function Timeline(props) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [id]);
 
   return (
     <Container>

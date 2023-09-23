@@ -43,4 +43,4 @@ const timelineData = [
   },
 ];
 
-export default timelineData;
+export { timelineData };

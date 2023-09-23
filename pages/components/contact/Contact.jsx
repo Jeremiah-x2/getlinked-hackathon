@@ -33,10 +33,10 @@ function Contact() {
           <h3>Share on</h3>
 
           <div className="icons">
-            <img src="/icons/instagram.svg" />
-            <img src="/icons/x.svg" />
-            <img src="/icons/facebook.svg" />
-            <img src="/icons/linkedin.svg" />
+            <img src="/icons/instagram.svg" alt="" />
+            <img src="/icons/x.svg" alt="" />
+            <img src="/icons/facebook.svg" alt="" />
+            <img src="/icons/linkedin.svg" alt="" />
           </div>
         </section>
 

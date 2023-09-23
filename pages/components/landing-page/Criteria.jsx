@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import judgingCriteria from "./judgingCriteria";
+import { judgingCriteria } from "./judgingCriteria";
 import colors from "../../../utils/colors";
 
 export default function Criteria() {

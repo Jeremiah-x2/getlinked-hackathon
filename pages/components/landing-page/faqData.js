@@ -19,4 +19,4 @@ const faq = [
   },
 ];
 
-export default faq;
+export  {faq};

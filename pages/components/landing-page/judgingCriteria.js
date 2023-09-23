@@ -26,4 +26,4 @@ const judgingCriteria = [
   },
 ];
 
-export default judgingCriteria;
+export { judgingCriteria };

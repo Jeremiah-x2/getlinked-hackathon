@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import colors from "../../../utils/colors";
 import styled from "styled-components";
 import ChangeSrc from "./ChangeSrc";
-import itemsData from "./itemsData";
+import { itemsData } from "./itemsData";
 
 export default function Introduction() {
   const items = itemsData.map((value, index) => (
@@ -47,6 +47,7 @@ export function IntroductionLoop(props) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [style, setStyle] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 1100) {
@@ -64,7 +65,7 @@ export function IntroductionLoop(props) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [id]);
 
   return (
     <Container>

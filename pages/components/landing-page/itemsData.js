@@ -39,4 +39,4 @@ const itemsData = [
   },
 ];
 
-export default itemsData;
+export { itemsData };

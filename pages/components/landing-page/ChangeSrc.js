@@ -6,6 +6,7 @@ export default function ChangeSrc(props) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [imageSrc, setImageSrc] = useState(mobile);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 1100) {
@@ -23,6 +24,6 @@ export default function ChangeSrc(props) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [desktop, mobile]);
   return <img src={imageSrc} alt={alt} className={classname} />;
 }
