@@ -7,7 +7,7 @@ export default function Criteria() {
     <Container>
       {judgingCriteria.map((item, index) => {
         return (
-          <div>
+          <div key={index}>
             <p>
               <span>{item.name}:</span> {item.description}
             </p>

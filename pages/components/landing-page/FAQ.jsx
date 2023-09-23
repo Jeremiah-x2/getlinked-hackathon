@@ -11,8 +11,8 @@ export default function FAQ() {
         <span>getlinked Hackathon 1.0</span>
       </header>
       <div>
-        {faq.map((item) => (
-          <div className="question-container">
+        {faq.map((item, index) => (
+          <div key={index} className="question-container">
             <h4 class="question">
               {item.question} <span>+</span>
             </h4>
