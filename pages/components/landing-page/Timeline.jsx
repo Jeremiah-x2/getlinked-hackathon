@@ -169,7 +169,7 @@ export default function Timelineloop() {
   ));
   return (
     <TimelineDiv>
-      <div class="head">
+      <div className="head">
         <h3>Timeline</h3>
         <p>
           Here is the breakdown of the timeline we anticipate using for the

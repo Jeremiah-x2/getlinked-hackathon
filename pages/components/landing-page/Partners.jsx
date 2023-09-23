@@ -5,7 +5,7 @@ import colors from "../../../utils/colors";
 export default function Partners() {
   return (
     <Partner>
-      <div class="head">
+      <div className="head">
         <h3>Partners and Sponsors</h3>
         <p>
           Getlinked Hackathon 1.0 is honored to have the following major

@@ -13,7 +13,7 @@ export default function FAQ() {
       <div>
         {faq.map((item, index) => (
           <div key={index} className="question-container">
-            <h4 class="question">
+            <h4 className="question">
               {item.question} <span>+</span>
             </h4>
           </div>

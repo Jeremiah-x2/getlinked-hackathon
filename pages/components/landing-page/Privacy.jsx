@@ -18,7 +18,7 @@ export default function Privacy() {
             our aim to always take of our participant
           </p>
         </div>
-        <div class="policy">
+        <div className="policy">
           <p className="policy-note">
             At getlinked tech Hackathon 1.0, we value your privacy and are
             committed to protecting your personal information. This Privacy
@@ -52,7 +52,7 @@ export default function Privacy() {
                 </p>
               </li>
             </ul>
-            <div class="button">
+            <div className="button">
               <Button text="Read More" />
             </div>
           </div>

@@ -9,7 +9,7 @@ export default function Home() {
       <Header />
       <Container>
         <Hero>
-          <p class="ignite">Igniting a Revolution in HR Innovation</p>
+          <p className="ignite">Igniting a Revolution in HR Innovation</p>
           <div className="getLinked">
             <ChangeSrc
               mobile="/images/landing-page/getLinked-mobile.png"

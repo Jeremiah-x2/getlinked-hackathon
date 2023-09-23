@@ -5,7 +5,7 @@ import colors from "../../../utils/colors";
 export default function Footer() {
   return (
     <Container>
-      <div class="footer">
+      <div className="footer">
         <div className="about">
           <div className="title">
             get<span>linked</span>
