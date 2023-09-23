@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import colors from "../../../utils/colors";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Button({ text }) {
-  console.log(text);
-  return <Buttons>{text}</Buttons>;
+  const router = useRouter();
+  const handleButtonClick = () => {
+    router.push("/register");
+  };
+
+  return <Buttons onClick={() => handleButtonClick()}>{text}</Buttons>;
 }
 
 const Buttons = styled.button`
@@ -20,4 +26,5 @@ const Buttons = styled.button`
     #ff26b9 99.99%,
     #fe34b9 100%
   );
+  z-index: 90000000;
 `;

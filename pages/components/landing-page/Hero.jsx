@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Header from "../Header";
+import Header from "../Header.jsx";
 import Button from "./Button";
 import ChangeSrc from "./ChangeSrc";
 

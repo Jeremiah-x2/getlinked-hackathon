@@ -12,6 +12,10 @@ body {
   color: #fff;
   background-color: #150e28;
 }
+nav,
+button {
+  cursor: pointer;
+}
 button,
 a,
 input,

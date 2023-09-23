@@ -1,29 +1,48 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../../../utils/colors";
+import { BsChevronLeft } from "react-icons/bs";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 function CHeader() {
-  let gradientText = {
-    background: "linear-gradient(90deg, #903AFF 3.08%, #FF26B9 93.85%)",
-    backgroundClip: "text",
+  const router = useRouter();
+  const handleButtonClick = () => {
+    router.push("/");
   };
   return (
     <Container>
-      <div className="title">
+      <div className="chevron--container">
+        <div className="chevron">
+          <BsChevronLeft />
+        </div>
+      </div>
+
+      <div className="title" onClick={() => handleButtonClick()}>
         get<span>linked</span>
       </div>
 
       <nav>
         {["Timeline", "Overview", "FAQs", "Contact"].map((value, index) => {
-          return (
+          return value == "Contact" ? (
+            <Link href="/contact">
+              <p
+                key={index}
+                className={value == "Contact" ? "gradientText" : ""}
+              >
+                {value}
+              </p>
+            </Link>
+          ) : (
             <p key={index} className={value == "Contact" ? "gradientText" : ""}>
               {value}
             </p>
           );
         })}
       </nav>
-
-      <button>Register</button>
+      <Link href="/register">
+        <button>Register</button>
+      </Link>
     </Container>
   );
 }
@@ -34,12 +53,50 @@ const Container = styled.header`
   padding-bottom: 1.875rem;
   padding-inline: 8rem;
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.18); */
   align-items: center;
   justify-content: space-between;
   @media screen and (max-width: 1400px) {
     padding-inline: 2.813rem;
     padding-top: 2.5rem;
+  }
+  @media screen and (max-width: 992px) {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .chevron--container {
+    @media screen and (min-width: 993px) {
+      display: none;
+    }
+    width: 1.45rem;
+    height: 1.45rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      270deg,
+      #903aff 0%,
+      #d434fe 56.42%,
+      #ff26b9 99.99%,
+      #fe34b9 100%
+    );
+    .chevron {
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 50%;
+      background: ${colors.darkPurple};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        width: 12px;
+        height: 12px;
+        display: flex;
+        border-radius: 50%;
+        align-items: center;
+      }
+    }
   }
   .title {
     font-family: "ClashDisplay";
@@ -47,6 +104,9 @@ const Container = styled.header`
     color: white;
     span {
       color: ${colors.pink};
+    }
+    @media screen and (max-width: 992px) {
+      display: none;
     }
   }
 
@@ -62,6 +122,9 @@ const Container = styled.header`
     color: white;
     margin-left: 22.25rem;
     padding-right: 3.563rem;
+    @media screen and (max-width: 992px) {
+      display: none;
+    }
   }
 
   button {
@@ -79,6 +142,9 @@ const Container = styled.header`
     outline: 0;
     color: white;
     font-weight: normal;
+    @media screen and (max-width: 992px) {
+      display: none;
+    }
   }
 `;
 

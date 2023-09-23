@@ -1,38 +1,234 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { TailSpin } from "react-loading-icons";
 import colors from "../../../utils/colors";
 import CHeader from "../contact/CHeader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
+
 function Register() {
+  const [showAlert, setShowAlert] = useState(false);
+  const [options, setOptions] = useState([]);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState(0);
+  const [teamname, setTeamname] = useState("");
+  const [category, setCategory] = useState(0);
+  const [groupsize, setGroupSize] = useState(0);
+  const [topic, setTopic] = useState("");
+  const [accepted, setAccepted] = useState(false);
+
+  let [submitting, setSubmitting] = useState(false);
+  let [showConfetti, setShowConfetti] = useState(false);
+  useEffect(() => {
+    fetchOptions();
+  }, []);
+
+  const fetchOptions = async () => {
+    try {
+      let request = await fetch(
+        "https://backend.getlinked.ai/hackathon/categories-list",
+        {
+          method: "GET",
+          header: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (request.ok) {
+        await request.json().then((data) => setOptions(data));
+      }
+    } catch (e) {
+      toast.error(e, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    if (accepted) {
+      console.log(email, phone, groupsize, topic, category);
+      if (
+        email.length > 0 &&
+        phone >= 10 &&
+        groupsize > 0 &&
+        topic.length > 0 &&
+        category != 0
+      ) {
+        try {
+          const formdata = {
+            email: email,
+            phone_number: phone,
+            team_name: teamname,
+            group_size: groupsize,
+            project_topic: topic,
+            category: category,
+            privacy_poclicy_accepted: accepted,
+          };
+          let request = await fetch(
+            "https://backend.getlinked.ai/hackathon/registration",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formdata),
+            }
+          );
+          if (request.ok) {
+            setShowAlert(true);
+            setSubmitting(false);
+            setShowConfetti(true);
+          } else {
+            setSubmitting(false);
+            await request.json().then((data) => {
+              toast.error(`Data already exist or something weird happened!`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+            });
+          }
+        } catch (e) {
+          toast.error(`${e}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          setSubmitting(false);
+        }
+      } else {
+        setSubmitting(false);
+        toast.warning("Inputted data not correct", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    } else {
+      setSubmitting(false);
+      toast.warning("Please accept our terms and conditions to continue", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+  const { width, height } = useWindowSize();
+
   return (
-    <MainContainer>
-      <OverlayAlert>
-        <div className="container">
-          <img src="/images/register/congrats.svg" alt="gradient" />
-          <h1>
-            Congratulations
-            <br />
-            you have successfully Registered!
-          </h1>
-          <p>
-            Yes, it was easy and you did it! check your mail box for next step
-            <img src="/images/register/emoji.svg" alt="emoji" />
-          </p>
-          <button>Back</button>
-        </div>
-      </OverlayAlert>
-      <CHeader />
+    <RegisterMainContainer>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {showConfetti && <Confetti width={width} height={height} />}
+      {showAlert && (
+        <OverlayAlert>
+          <div className="flex--body">
+            <div className="container">
+              <div className="star--container">
+                <img
+                  src="/images/register/alert-star.svg"
+                  alt=""
+                  className="star"
+                />
+              </div>
+              <div className="img--container">
+                <img
+                  src="/images/register/congrats.svg"
+                  alt=""
+                  className="congrats"
+                />
+              </div>
+              <h1>
+                Congratulations
+                <br />
+                you have successfully Registered!
+              </h1>
+              <p>
+                Yes, it was easy and you did it! check your mail box for next
+                step
+                <img src="/images/register/emoji.svg" alt="emoji" />
+              </p>
+              <button
+                onClick={() => {
+                  setShowAlert(false), setShowConfetti(false);
+                }}
+              >
+                Back
+              </button>
+            </div>
+          </div>
+        </OverlayAlert>
+      )}
+      <div className="view--controller">
+        <CHeader />
+      </div>
+
       <Body>
         <section className="desc--container">
           <img src="/images/register/3d-men.svg" alt="3d-men" />
         </section>
 
+        <section className="mobile-gradient">
+          <img src="/images/register/mobile-gradient.svg" alt="" />
+        </section>
+
         <FormContainer>
           <h1>Register</h1>
+          <section className="mobile-3d">
+            <img src="/images/register/small-3d-men.svg" alt="" />
+          </section>
+
           <div className="movement">
-            <p>Be part of this movement!</p>
+            <p>
+              Be part of this movement!
+              <span className="movement-img">
+                <img src="/images/register/movement.svg" alt="" />
+              </span>
+            </p>
             <h2>CREATE YOUR ACCOUNT</h2>
           </div>
-          <form>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <div className="inputContainer">
               <label htmlFor="teamname">Team’s Name</label>
               <input
@@ -40,6 +236,8 @@ function Register() {
                 name="teamname"
                 id="#"
                 placeholder="Enter the name of your group"
+                onChange={(e) => setTeamname(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -49,6 +247,8 @@ function Register() {
                 name="phone"
                 id="#"
                 placeholder="Enter your phone number"
+                onChange={(e) => setPhone(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -58,6 +258,8 @@ function Register() {
                 name="email"
                 id="#"
                 placeholder="Enter your email address"
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -67,59 +269,106 @@ function Register() {
                 name="topic"
                 id="#"
                 placeholder="What is your group project topic"
+                onChange={(e) => setTopic(e.target.value)}
+                required
               />
             </div>
             <div>
               <label htmlFor="category">Category</label>
-              <input
-                type="text"
+              <select
                 name="category"
-                id="#"
-                placeholder="Category"
-              />
+                placeholder="Select"
+                onClick={(e) => {
+                  let value = e.target.value;
+                  setCategory(
+                    value == "MOBILE"
+                      ? 1
+                      : value == "WEB"
+                      ? 2
+                      : value == "UI/UX"
+                      ? 3
+                      : 0
+                  );
+                }}
+                required
+              >
+                <option value="Select" defaultChecked>
+                  Select
+                </option>
+                {options.length > 0 &&
+                  options.map((e, index) => {
+                    return (
+                      <option key={index} value={e.name}>
+                        {e.name}
+                      </option>
+                    );
+                  })}
+              </select>
             </div>
             <div>
               <label htmlFor="groupsize">Group Size</label>
-
-              <select name="groupSize" placeholder="Select">
-                <option value="first">1 - 30</option>
-                <option value="second">30 - 90</option>
-                <option value="third">So many</option>
-              </select>
+              <input
+                type="number"
+                name="groupsize"
+                id="#"
+                placeholder="Group size"
+                required
+                onChange={(e) => setGroupSize(e.target.value)}
+              />
             </div>
           </form>
           <p className="warning">
             Please review your registration details before submitting
           </p>
           <div className="checkbox">
-            <input type="checkbox" name="" id="" />
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              onClick={(e) => {
+                setAccepted(e.target.checked), console.log(e.target.checked);
+              }}
+              required
+            />
             <p>
               I agreed with the event terms and conditions and privacy policy
             </p>
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={(e) => handleSubmit(e)}>
+            {!submitting && <span>Submit</span>}
+            {submitting && <TailSpin fontSize={8}></TailSpin>}
+          </button>
         </FormContainer>
       </Body>
-      <div className="gradient--2">
+      {/* <div className="gradient--2">
         <img src="/images/register/gradient-2.svg" alt="gradient" />
-      </div>
-    </MainContainer>
+      </div> */}
+    </RegisterMainContainer>
   );
 }
 
-const MainContainer = styled.header`
+const RegisterMainContainer = styled.div`
   width: 100vw;
-  padding-bottom: 7.188rem;
-  background-color: ${colors.darkPurple};
+  height: auto;
+  padding-bottom: 9.188rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  @media screen and (max-width: 992px) {
+    padding-bottom: 1.5rem;
+  }
   div.gradient--2 {
     position: absolute;
     bottom: 0;
     right: 0;
-    overflow-y: scroll;
     img {
       object-fit: cover;
       opacity: 0.7;
       transform: translateY(10px);
+    }
+  }
+  .view--controller {
+    @media screen and (max-width: 993px) {
+      display: none;
     }
   }
 `;
@@ -132,18 +381,37 @@ const Body = styled.section`
   justify-content: space-between;
   align-items: center;
   gap: 50px;
+  height: auto;
   @media screen and (max-width: 1400px) {
     margin-top: 0rem;
     padding-inline-start: 0;
-    padding-inline-end: 7rem;
+    padding-inline-end: 3rem;
   }
 
+  @media screen and (max-width: 992px) {
+    padding-inline: 3.063rem;
+  }
   section.desc--container {
     width: 50%;
     display: flex;
     align-items: start;
     img {
-      transform: translateY(-100px);
+      transform: translate(-100px, -100px);
+      @media screen and (max-width: 992px) {
+        width: 12.188rem;
+        height: 9.688rem;
+      }
+    }
+    @media screen and (max-width: 992px) {
+      display: none;
+    }
+  }
+  section.mobile-gradient {
+    position: absolute;
+    left: 0;
+    top: 0;
+    @media screen and (min-width: 993px) {
+      display: none;
     }
   }
 `;
@@ -157,18 +425,44 @@ const FormContainer = styled.section`
   padding-top: 75px;
   padding-bottom: 4.188rem;
   margin-top: 6rem;
+  position: relative;
   @media screen and (max-width: 1400px) {
     padding-top: 2.813rem;
     padding-bottom: 3.5rem;
     padding-inline: 3rem;
     margin-top: 1rem;
   }
+  @media screen and (max-width: 992px) {
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    padding-inline: 0.188rem;
+    box-shadow: none;
+  }
+  section.mobile-3d {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    @media screen and (min-width: 993px) {
+      display: none;
+    }
+    /* img {
+      width: 12.188rem;
+      height: 9.688rem;
+      flex-shrink: 0;
+    } */
+  }
+
   h1 {
     color: ${colors.pink};
     font-family: "ClashDisplay";
     font-size: 2rem;
     font-weight: 600;
     line-height: normal;
+    @media screen and (max-width: 992px) {
+      font-size: 0.938rem;
+    }
   }
   div.movement {
     font-size: 0.875rem;
@@ -176,7 +470,15 @@ const FormContainer = styled.section`
     line-height: normal;
     color: #fff;
     margin-top: 2.875rem;
-
+    @media screen and (max-width: 992px) {
+      margin-top: 1.438rem;
+    }
+    p {
+      span.movement-img {
+        display: inline-block;
+        transform: translate(2px, 1px);
+      }
+    }
     h2 {
       font-size: 24px;
       font-weight: 700;
@@ -194,6 +496,12 @@ const FormContainer = styled.section`
     @media screen and (max-width: 1400px) {
       column-gap: 1.875rem;
       row-gap: 1.875rem;
+    }
+    @media screen and (max-width: 992px) {
+      grid-template-columns: 1fr;
+      row-gap: 1.125rem;
+      column-gap: 0;
+      margin-top: 1.438rem;
     }
     div {
       input,
@@ -272,9 +580,20 @@ const OverlayAlert = styled.section`
   background-color: #150e28e8;
   z-index: 999999999999;
   position: absolute;
-  display: flex;
+  display: absolute;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 992px) {
+    padding-inline: 3.5rem;
+  }
+  div.flex--body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
   div.container {
     padding-inline: 3.375rem;
     padding-top: 2rem;
@@ -287,13 +606,42 @@ const OverlayAlert = styled.section`
       padding-inline: 2.5rem;
       padding-top: 1rem;
     }
-
+    @media screen and (max-width: 992px) {
+      width: 100%;
+    }
+    div.star--container {
+      position: absolute;
+      right: 0;
+      top: 18%;
+      right: 10%;
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+        object-fit: contain;
+      }
+    }
+    div.img--container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img.congrats {
+        @media screen and (max-width: 992px) {
+          width: 10rem;
+          height: 8rem;
+        }
+      }
+    }
     h1 {
       color: #fff;
       text-align: center;
       font-size: 2rem;
       font-weight: 600;
       line-height: normal;
+      @media screen and (max-width: 992px) {
+        font-size: 1rem;
+        margin-top: 1.625rem;
+      }
     }
     p {
       width: 50%;
@@ -304,6 +652,10 @@ const OverlayAlert = styled.section`
       line-height: normal;
       margin-top: 0.938rem;
       margin-inline: auto;
+      @media screen and (max-width: 992px) {
+        font-size: 0.75rem;
+        width: 100%;
+      }
       img {
         width: 1.25rem;
         height: 1.25rem;

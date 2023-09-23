@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import colors from "../../utils/colors";
+import Link from "next/link";
 
 function Header() {
   const [showMenu, setShowMenu] = useState("");
@@ -10,11 +11,12 @@ function Header() {
   function handleCloseMenu() {
     setShowMenu("");
   }
-  console.log(showMenu);
   return (
     <Container>
       <div className="title">
+        {/* <Link href="/"> */}
         get<span>linked</span>
+        {/* </Link> */}
       </div>
 
       <div className={["nav--list", showMenu].join(" ")}>
@@ -23,10 +25,18 @@ function Header() {
         </div>
         <nav>
           {["Timeline", "Overview", "FAQs", "Contact"].map((value, index) => {
-            return <p key={index}>{value}</p>;
+            return value == "Contact" ? (
+              <Link key={index} href="/contact">
+                <p key={index}>{value}</p>
+              </Link>
+            ) : (
+              <p key={index}>{value}</p>
+            );
           })}
         </nav>
-        <button>Register</button>
+        <Link href="/register">
+          <button>Register</button>
+        </Link>
       </div>
       <img
         src="/images/landing-page/hamburger.png"
@@ -47,7 +57,10 @@ const Container = styled.header`
   display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   align-items: center;
-
+  @media screen and (max-width: 1400px) {
+    padding-top: 1.875rem;
+    margin-bottom: 2rem;
+  }
   .title {
     font-family: "ClashDisplay";
     font-size: 2.25rem;
